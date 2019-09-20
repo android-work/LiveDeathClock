@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+        <!--时间钟控件-->
+        <com.ancroid.work.clockview.ClockView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/splash_clock"
+                android:layout_marginTop="80dp"
+                android:layout_marginBottom="100dp"/>
+
+        <com.android.jay.livedeathclock.view.SplashSetView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/splash_ssv"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:gravity="center"
+                android:layout_marginTop="50dp"
+                android:id="@+id/splash_over"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:textSize="18sp"
+                android:textColor="#fff"
+                android:background="@drawable/splash_over_bg"/>
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@mipmap/ic_splash_bg"
+            android:id="@+id/splash_bg"/>
+
+</FrameLayout>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="250dp"
+              android:layout_height="330dp">
+
+    <RelativeLayout
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:background="@color/splash_popup_title_color">
+        <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_down"
+                android:padding="10dp"
+                android:layout_marginLeft="5dp"
+                android:id="@+id/splash_live_down"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/splash_popup_over"
+                android:layout_alignParentRight="true"
+                android:padding="10dp"
+                android:textColor="#fff"
+                android:textSize="16sp"
+                android:id="@+id/splash_live_over"/>
+
+    </RelativeLayout>
+
+    <com.wx.wheelview.widget.WheelView
+            android:id="@+id/splash_live_wheel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+</LinearLayout>

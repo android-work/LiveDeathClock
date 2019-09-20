@@ -2,5 +2,7 @@
 <resources>
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="splash_over_color">#EE306B</color>
+    <color name="edit_color">#D7E8E8EE</color>
+    <color name="splash_popup_title_color">#43000000</color>
 </resources>

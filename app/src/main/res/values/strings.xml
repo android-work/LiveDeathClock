@@ -9,4 +9,15 @@
     <string name="minute">分</string>
     <string name="second">秒</string>
     <string name="splash_live_year">猜猜自己能活多少岁</string>
+    <string name="fragment_live_title">生之钟</string>
+    <string name="clock">死之钟锁屏</string>
+    <string name="update_bir">修改出生日期</string>
+    <string name="death">设定死之钟</string>
+    <string name="help">锁屏帮助</string>
+    <string name="issue_back">意见反馈</string>
+    <string name="score">给我们评分</string>
+    <string name="main_live">生之钟</string>
+    <string name="main_death">死之钟</string>
+    <string name="main_wish">心愿单</string>
+    <string name="main_date_calculation">计算日期</string>
 </resources>

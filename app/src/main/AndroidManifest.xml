@@ -8,7 +8,7 @@
             android:label="@string/app_name"
             android:supportsRtl="true"
             android:theme="@style/FullScreenTheme">
-        <activity android:name=".activity.SplashActivity">
+        <activity android:name="com.android.jay.livedeathclock.view.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -16,7 +16,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MainActivity"/>
+        <activity android:name="com.android.jay.livedeathclock.view.activity.MainActivity"/>
     </application>
 
 </manifest>

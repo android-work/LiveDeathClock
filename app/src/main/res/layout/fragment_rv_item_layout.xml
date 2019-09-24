@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:gravity="center_vertical"
+              android:id="@+id/fragment_left_item_ll">
+    <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@mipmap/ic_update_bir"
+            android:id="@+id/fragment_left_item_ic"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="修改出生日期"
+            android:textColor="#000"
+            android:textSize="18sp"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/fragment_left_item_text"/>
+
+</LinearLayout>

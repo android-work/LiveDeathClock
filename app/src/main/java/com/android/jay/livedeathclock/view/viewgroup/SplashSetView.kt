@@ -1,4 +1,4 @@
-package com.android.jay.livedeathclock.view
+package com.android.jay.livedeathclock.view.viewgroup
 
 import android.content.Context
 import android.util.AttributeSet
@@ -13,7 +13,6 @@ import com.android.jay.livedeathclock.utils.SpUtils
 import com.android.jay.livedeathclock.view.dialog.SplashLiveDialog
 import com.android.jay.livedeathclock.view.popupwindow.SplashWheelViewPopup
 import kotlinx.android.synthetic.main.splash_set_layout.view.*
-import java.time.Year
 import java.util.*
 
 /**

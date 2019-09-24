@@ -1,4 +1,4 @@
-package com.android.jay.livedeathclock.activity
+package com.android.jay.livedeathclock.view.activity
 
 import android.content.Context
 import android.content.Intent
@@ -7,10 +7,8 @@ import android.view.View
 import android.view.WindowManager
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
-import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.android.jay.livedeathclock.IS_SHOW_SPLASH
-import com.android.jay.livedeathclock.MainActivity
 import com.android.jay.livedeathclock.R
 import com.android.jay.livedeathclock.imp.SplashPresenter
 import com.android.jay.livedeathclock.interfaces.presenter.IPresenter
@@ -57,11 +55,11 @@ class SplashActivity : AppCompatActivity(),IView.ISplashView{
             splash_over.text = getString(R.string.splash_popup_over)
 
             splash_over.setOnClickListener { view ->
-                startActivity(Intent(this,MainActivity::class.java))
+                startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }
         }else{
-            startActivity(Intent(this,MainActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
     }

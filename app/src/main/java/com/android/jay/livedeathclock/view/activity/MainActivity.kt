@@ -3,7 +3,6 @@ package com.android.jay.livedeathclock.view.activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.FragmentFactory
 import androidx.fragment.app.FragmentTransaction
 import com.android.jay.livedeathclock.R
 import com.android.jay.livedeathclock.interfaces.MainBtnClickListener
@@ -18,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     var curFragment: BaseFragment? = null
-    var beginTransaction: FragmentTransaction? = null
+//    var beginTransaction: FragmentTransaction? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,8 +25,8 @@ class MainActivity : AppCompatActivity() {
 
         curFragment = createFragment(0)
 
-        beginTransaction = supportFragmentManager.beginTransaction()
-        beginTransaction?.add(R.id.main_fl,curFragment!!)
+        var beginTransaction = supportFragmentManager.beginTransaction()
+        beginTransaction?.add(R.id.main_fl,curFragment!!,"live")
         beginTransaction?.commit()
 
         setListener()
@@ -67,20 +66,21 @@ class MainActivity : AppCompatActivity() {
 
                 }
 
-                //将fragment添加到布局中
-                beginTransaction?.hide(curFragment!!)
+                var beginTransaction = supportFragmentManager.beginTransaction()
 
                 logUtil("tag","${fragment?.isAdded}")
-                if(fragment?.isAdded ?: false/*&& supportFragmentManager.findFragmentByTag(fragmentTag) != null*/){
+                if(fragment?.isAdded ?: false && supportFragmentManager.findFragmentByTag(fragmentTag) != null){
 
                     logUtil("tag","已经加载过")
                     beginTransaction?.show(fragment!!)
                 }else{
 
                     logUtil("tag","${curFragment}:fragmentTag：$fragment")
-                    beginTransaction?.add(R.id.main_fl,fragment!!)
+                    beginTransaction?.add(R.id.main_fl,fragment!!,fragmentTag)
                     beginTransaction?.commit()
                 }
+                //将fragment添加到布局中
+                beginTransaction?.hide(curFragment!!)
                 curFragment = fragment
 
             }

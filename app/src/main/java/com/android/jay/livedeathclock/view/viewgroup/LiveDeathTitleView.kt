@@ -28,11 +28,11 @@ class LiveDeathTitleView : FrameLayout{
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int):super(context,attrs,defStyleAttr){
 
         mContext = context
-        titleView = LayoutInflater.from(context).inflate(R.layout.fragment_live_death_layout, this, false)
+        titleView = LayoutInflater.from(context).inflate(R.layout.fragment_live_death_layout, this, true)
 
-//        initView()
-//
-//        setListener()
+        initView()
+
+        setListener()
     }
 
     /**
@@ -40,7 +40,7 @@ class LiveDeathTitleView : FrameLayout{
      * */
     private fun initView() {
 
-        fragmentLeftRv = titleView?.findViewById<RecyclerView>(R.id.fragment_left_rv)
+        fragmentLeftRv = titleView?.findViewById(R.id.fragment_left_rv)
         val manager = LinearLayoutManager(mContext, RecyclerView.VERTICAL, false)
         fragmentLeftRv?.layoutManager = manager
         fragmentLeftRv?.adapter = FragmentLeftAdapter(mContext!!,Utlis.initDrawLayoutDate(context))

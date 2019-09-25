@@ -29,7 +29,7 @@ class FragmentLeftAdapter(var context: Context,var dates: MutableList<DrawLayout
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        holder.itemIc.setImageResource(dates[position].resId)
+        holder.itemIc.setBackgroundResource(dates[position].resId)
 
         holder.itemText.text = dates[position].content
 

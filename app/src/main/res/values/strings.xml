@@ -20,4 +20,7 @@
     <string name="main_death">死之钟</string>
     <string name="main_wish">心愿单</string>
     <string name="main_date_calculation">计算日期</string>
+    <string name="fragment_live_age">你的年龄</string>
+    <string name="age">%d岁</string>
+    <string name="fragment_live_existence">在这个世界上，你已经存在了</string>
 </resources>

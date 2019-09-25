@@ -20,15 +20,19 @@ import kotlinx.android.synthetic.main.fragment_live_death_layout.view.*
 class LiveDeathTitleView : FrameLayout{
 
     var mContext: Context? = null
+    var titleView: View? = null
+    var fragmentLeftRv: RecyclerView? = null
+
     constructor(context: Context):this(context,null)
     constructor(context: Context,attrs: AttributeSet?):this(context,attrs,0)
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int):super(context,attrs,defStyleAttr){
+
         mContext = context
-        LayoutInflater.from(context).inflate(R.layout.fragment_live_death_layout,this,false)
+        titleView = LayoutInflater.from(context).inflate(R.layout.fragment_live_death_layout, this, false)
 
-        initView()
-
-        setListener()
+//        initView()
+//
+//        setListener()
     }
 
     /**
@@ -36,9 +40,10 @@ class LiveDeathTitleView : FrameLayout{
      * */
     private fun initView() {
 
+        fragmentLeftRv = titleView?.findViewById<RecyclerView>(R.id.fragment_left_rv)
         val manager = LinearLayoutManager(mContext, RecyclerView.VERTICAL, false)
-        fragment_left_rv.layoutManager = manager
-        fragment_left_rv.adapter = FragmentLeftAdapter(mContext!!,Utlis.initDrawLayoutDate(context))
+        fragmentLeftRv?.layoutManager = manager
+        fragmentLeftRv?.adapter = FragmentLeftAdapter(mContext!!,Utlis.initDrawLayoutDate(context))
     }
 
 
@@ -50,7 +55,7 @@ class LiveDeathTitleView : FrameLayout{
         }
 
         //侧拉栏条目的点击事件
-        (fragment_left_rv.adapter as(FragmentLeftAdapter)).setRvItemClickListener(object: RvItemClickListener {
+        (fragmentLeftRv?.adapter as(FragmentLeftAdapter)).setRvItemClickListener(object: RvItemClickListener {
             override fun itemClick(view: View, position: Int) {
 
 

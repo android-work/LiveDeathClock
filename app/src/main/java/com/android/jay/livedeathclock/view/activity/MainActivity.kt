@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.android.jay.livedeathclock.R
 import com.android.jay.livedeathclock.interfaces.MainBtnClickListener
 import com.android.jay.livedeathclock.utils.createFragment
+import com.android.jay.livedeathclock.utils.logUtil
 import com.android.jay.livedeathclock.view.fragment.base.BaseFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -39,20 +40,28 @@ class MainActivity : AppCompatActivity() {
         main_btn_group.setMainBtnClickListener(object : MainBtnClickListener{
             override fun btnClick(view: View) {
 
-                var fragment: BaseFragment? = null
+                var fragmentTag: String? = null
 
                 //创建/获取fragment
-                fragment = when(view.id){
+                var fragment = when(view.id){
 
                     R.id.main_live -> {
+
+                        fragmentTag = "live"
                         createFragment(0)
                     }
                     R.id.main_death ->{
+
+                        fragmentTag = "death"
                         createFragment(1)
                     }
                     R.id.main_wish ->{
+
+                        fragmentTag = "wish"
                         createFragment(2)
                     }else -> {
+
+                        fragmentTag = "dateCalculate"
                         createFragment(3)
                     }
 
@@ -60,12 +69,19 @@ class MainActivity : AppCompatActivity() {
 
                 //将fragment添加到布局中
                 beginTransaction?.hide(curFragment!!)
-                if(fragment?.isAdded == false){
-                    beginTransaction?.show(fragment)
+
+                logUtil("tag","${fragment?.isAdded}")
+                if(fragment?.isAdded ?: false/*&& supportFragmentManager.findFragmentByTag(fragmentTag) != null*/){
+
+                    logUtil("tag","已经加载过")
+                    beginTransaction?.show(fragment!!)
                 }else{
-                    beginTransaction?.add(R.id.main_fl,fragment!!)?.commit()
-                    curFragment = fragment
+
+                    logUtil("tag","${curFragment}:fragmentTag：$fragment")
+                    beginTransaction?.add(R.id.main_fl,fragment!!)
+                    beginTransaction?.commit()
                 }
+                curFragment = fragment
 
             }
 

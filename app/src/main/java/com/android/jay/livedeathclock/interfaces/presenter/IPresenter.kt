@@ -17,4 +17,19 @@ interface IPresenter {
         //解绑view
         fun unBindView()
     }
+
+    /**
+     * LiveFragment的presenter接口
+     * */
+    interface ILivePresenter{
+
+        //计算年龄
+        fun calculateAge()
+
+        //绑定view
+        fun bindView(splashView: IView.ISplashView)
+
+        //解绑view
+        fun unBindView()
+    }
 }

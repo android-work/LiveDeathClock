@@ -23,6 +23,8 @@ fun createFragment(position: Int): BaseFragment? {
             2 -> fragments[position] = WishFragment()
             else -> fragments[position] = DateCalculationFragment()
         }
+
+        logUtil("tag","${fragments[position]}")
     }
 
     return fragments[position]

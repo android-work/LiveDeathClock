@@ -44,4 +44,14 @@
             android:textSize="15sp"
             android:id="@+id/splash_live_text"/>
 
+    <androidx.appcompat.widget.AppCompatTextView
+            android:gravity="center"
+            android:layout_marginTop="50dp"
+            android:id="@+id/splash_over"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:textSize="18sp"
+            android:textColor="#fff"
+            android:background="@drawable/splash_over_bg"/>
+
 </LinearLayout>

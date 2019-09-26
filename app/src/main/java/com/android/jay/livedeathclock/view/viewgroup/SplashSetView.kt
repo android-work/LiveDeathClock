@@ -1,6 +1,8 @@
 package com.android.jay.livedeathclock.view.viewgroup
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
@@ -10,8 +12,10 @@ import com.android.jay.livedeathclock.R
 import com.android.jay.livedeathclock.interfaces.SplashUpDateUIListener
 import com.android.jay.livedeathclock.utils.DateUtil
 import com.android.jay.livedeathclock.utils.SpUtils
+import com.android.jay.livedeathclock.view.activity.MainActivity
 import com.android.jay.livedeathclock.view.dialog.SplashLiveDialog
 import com.android.jay.livedeathclock.view.popupwindow.SplashWheelViewPopup
+import kotlinx.android.synthetic.main.splash_layout.*
 import kotlinx.android.synthetic.main.splash_set_layout.view.*
 import java.util.*
 
@@ -20,15 +24,20 @@ import java.util.*
  * */
 class SplashSetView : FrameLayout {
 
+    var mActivity: Activity? = null
+    var mContext: Context? = null
+
     constructor(context: Context):this(context,null)
     constructor(context: Context,attrs: AttributeSet?):this(context,attrs,0)
     constructor(context: Context,attrs: AttributeSet?,defStyleAttr: Int):super(context,attrs,defStyleAttr){
+
+        mContext = context
 
         LayoutInflater.from(context).inflate(R.layout.splash_set_layout,this,true)
 
         splash_bir_text.setOnClickListener{ view ->
 
-            //弹出wheelview控件弹窗
+            //展示出生弹窗
             showWheelView()
         }
 
@@ -36,6 +45,15 @@ class SplashSetView : FrameLayout {
 
             //弹出选择生命弹窗
             showLiveYear()
+        }
+
+        splash_over.setOnClickListener { view ->
+            //完成按钮
+            mActivity?.startActivity(Intent(mContext, MainActivity::class.java))
+
+            mActivity?.finish()
+
+            mActivity = null
         }
 
         initView()
@@ -50,6 +68,8 @@ class SplashSetView : FrameLayout {
         splash_bir_text.text = "${SpUtils.getString(context, BIR_DATE,"${date} 00:00:00")}"
 
         splash_live_text.text = "${SpUtils.getInt(context, LIVE_YEARS,90)}"
+
+        splash_over.text = mContext?.getString(R.string.splash_popup_over)
     }
 
     /**
@@ -72,7 +92,7 @@ class SplashSetView : FrameLayout {
     }
 
     /**
-     * 展示弹窗
+     * 展示出生弹窗
      * */
     private fun showWheelView() {
 
@@ -89,6 +109,14 @@ class SplashSetView : FrameLayout {
             }
 
         })
+    }
+
+
+    /**
+     * 获取activity
+     * */
+    fun setActivity(activity: Activity){
+        mActivity = activity
     }
 
 

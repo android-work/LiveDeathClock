@@ -11,6 +11,7 @@
 
         <!--标题布局-->
         <RelativeLayout
+                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
             <androidx.appcompat.widget.AppCompatImageView
@@ -36,6 +37,7 @@
 
         <!--主界面内容布局-->
         <FrameLayout
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/fragment_content_fl">

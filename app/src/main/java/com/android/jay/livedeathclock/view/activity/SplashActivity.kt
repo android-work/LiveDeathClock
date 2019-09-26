@@ -14,7 +14,7 @@ import com.android.jay.livedeathclock.imp.SplashPresenter
 import com.android.jay.livedeathclock.interfaces.presenter.IPresenter
 import com.android.jay.livedeathclock.interfaces.view.IView
 import com.android.jay.livedeathclock.utils.SpUtils
-import kotlinx.android.synthetic.main.activity_splash.*
+import kotlinx.android.synthetic.main.splash_layout.*
 
 /**
  * @author Mr.Liu
@@ -30,7 +30,7 @@ class SplashActivity : AppCompatActivity(),IView.ISplashView{
         //隐藏状态栏
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
 
-        setContentView(R.layout.activity_splash)
+        setContentView(R.layout.splash_layout)
 
         context = this
 
@@ -52,12 +52,7 @@ class SplashActivity : AppCompatActivity(),IView.ISplashView{
             createAnimator()
             SpUtils.saveBoolean(this, IS_SHOW_SPLASH,false)
 
-            splash_over.text = getString(R.string.splash_popup_over)
-
-            splash_over.setOnClickListener { view ->
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
-            }
+            splash_ssv.setActivity(this)
         }else{
             startActivity(Intent(this, MainActivity::class.java))
             finish()

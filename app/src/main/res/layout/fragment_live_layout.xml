@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:background="@color/fragment_live_bg_color">
 
     <LinearLayout
             android:layout_marginTop="80dp"
@@ -57,13 +58,22 @@
 
         </LinearLayout>
 
-        <FrameLayout
+        <com.android.jay.livedeathclock.view.viewgroup.LiveBottomViewGroup
                 android:layout_marginTop="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/fragment_live_existence_fl">
+                android:id="@+id/fragment_btn_top_view"
+                android:background="@color/fragment_live_top_color">
 
-        </FrameLayout>
+        </com.android.jay.livedeathclock.view.viewgroup.LiveBottomViewGroup>
+
+        <com.android.jay.livedeathclock.view.viewgroup.LiveBottomViewGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/fragment_btn_bottom_view"
+                android:background="@color/fragment_live_bottom_color">
+
+        </com.android.jay.livedeathclock.view.viewgroup.LiveBottomViewGroup>
 
     </LinearLayout>
 

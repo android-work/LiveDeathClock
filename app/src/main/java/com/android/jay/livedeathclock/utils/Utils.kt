@@ -7,7 +7,7 @@ import com.android.jay.livedeathclock.bean.DrawLayoutBean
 /**
  * @author Mr.Liu
  * */
-object Utlis{
+object Utils{
 
     /**
      * dp转px工具类

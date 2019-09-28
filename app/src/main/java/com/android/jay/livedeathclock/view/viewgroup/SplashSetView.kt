@@ -12,6 +12,7 @@ import com.android.jay.livedeathclock.R
 import com.android.jay.livedeathclock.interfaces.SplashUpDateUIListener
 import com.android.jay.livedeathclock.utils.DateUtil
 import com.android.jay.livedeathclock.utils.SpUtils
+import com.android.jay.livedeathclock.utils.Utils
 import com.android.jay.livedeathclock.view.activity.MainActivity
 import com.android.jay.livedeathclock.view.dialog.SplashLiveDialog
 import com.android.jay.livedeathclock.view.popupwindow.SplashWheelViewPopup
@@ -48,6 +49,11 @@ class SplashSetView : FrameLayout {
         }
 
         splash_over.setOnClickListener { view ->
+
+            //保存默认数据
+            SpUtils.saveString(context,BIR_DATE, splash_bir_text.text.toString().trim())
+            SpUtils.saveInt(context, LIVE_YEARS,splash_live_text.toString().trim().toInt())
+
             //完成按钮
             mActivity?.startActivity(Intent(mContext, MainActivity::class.java))
 
@@ -65,7 +71,7 @@ class SplashSetView : FrameLayout {
     private fun initView() {
 
         var date = "${Calendar.getInstance().get(Calendar.YEAR)}-${String.format("%02d",Calendar.getInstance().get(Calendar.MONTH))}-${String.format("%02d",Calendar.getInstance().get(Calendar.DAY_OF_MONTH))}"
-        splash_bir_text.text = "${SpUtils.getString(context, BIR_DATE,"${date} 00:00:00")}"
+        splash_bir_text.text = "${SpUtils.getString(context, BIR_DATE,"$date 00:00:00")}"
 
         splash_live_text.text = "${SpUtils.getInt(context, LIVE_YEARS,90)}"
 

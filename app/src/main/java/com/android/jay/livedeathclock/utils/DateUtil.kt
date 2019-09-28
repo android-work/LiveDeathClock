@@ -1,5 +1,6 @@
 package com.android.jay.livedeathclock.utils
 
+import java.text.SimpleDateFormat
 import java.util.*
 
 /**
@@ -157,5 +158,87 @@ object DateUtil {
         }
 
         return liveYears
+    }
+
+    /**
+     * 日期转换为毫秒值
+     *
+     * @param date 日期
+     *
+     * @param format 日期格式
+     * */
+    fun dateStr2Millis(date: String,format: String): Long{
+
+        val simpleDateFormat = SimpleDateFormat(format)
+        return simpleDateFormat.parse(date).time
+    }
+
+    /**
+     * 计算年龄
+     *
+     * @param birMillis 出生毫秒值
+     * */
+    fun calculationAge(birMillis: Long): Int{
+
+        val instance = Calendar.getInstance()
+        val curYear = instance.get(Calendar.YEAR)
+
+        instance.timeInMillis = birMillis
+        val birYear = instance.get(Calendar.YEAR)
+
+        return curYear - birYear + 1
+
+    }
+
+    /**
+     * 计算天数
+     * */
+    fun calculationDays(birMillis: Long): Long{
+
+        var curMillis = System.currentTimeMillis()
+
+        return (curMillis - birMillis) / (1000 * 60 * 60 * 24)
+    }
+
+    /**
+     * 计算月数
+     * */
+    fun calculationMonths(birMillis: Long): Int{
+
+        val instance = Calendar.getInstance()
+
+        val age = calculationAge(birMillis)
+
+        return (age - 1) * 12 + instance.get(Calendar.MONTH)
+    }
+
+    /**
+     * 计算周数
+     * */
+    fun calculationWeeks(birMillis: Long): Long{
+
+        val days = calculationDays(birMillis)
+
+        return days / 7
+    }
+
+    /**
+     * 计算小时
+     * */
+    fun calculationHours(birMillis: Long):Long{
+
+        val calendar = Calendar.getInstance()
+
+        val curTillis = calendar.timeInMillis
+
+        return (curTillis - birMillis) / (1000 * 60 * 60)
+    }
+
+    /**
+     * 计算分钟
+     * */
+    fun calculationMinutes(birMillis: Long): Long{
+
+       return calculationHours(birMillis) * 60
     }
 }

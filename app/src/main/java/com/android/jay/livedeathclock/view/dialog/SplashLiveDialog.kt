@@ -8,7 +8,7 @@ import com.android.jay.livedeathclock.R
 import com.android.jay.livedeathclock.interfaces.SplashUpDateUIListener
 import com.android.jay.livedeathclock.utils.DateUtil
 import com.android.jay.livedeathclock.utils.SpUtils
-import com.android.jay.livedeathclock.utils.Utlis
+import com.android.jay.livedeathclock.utils.Utils
 import com.wx.wheelview.adapter.ArrayWheelAdapter
 import com.wx.wheelview.widget.WheelView
 import kotlinx.android.synthetic.main.splash_live_layout.*
@@ -37,7 +37,7 @@ class SplashLiveDialog(context: Context) : Dialog(context) {
         splashLiveWheel?.selection = liveYears ?: 90
 
         var style = WheelView.WheelViewStyle()
-        style.selectedTextSize = Utlis.dp2Px(context,10f).toInt()
+        style.selectedTextSize = Utils.dp2Px(context,10f).toInt()
         style.selectedTextZoom = 2f
         splashLiveWheel?.style = style
 

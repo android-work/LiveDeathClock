@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.jay.livedeathclock.R
 import com.android.jay.livedeathclock.adapter.FragmentLeftAdapter
 import com.android.jay.livedeathclock.interfaces.RvItemClickListener
-import com.android.jay.livedeathclock.utils.Utlis
+import com.android.jay.livedeathclock.utils.Utils
 import kotlinx.android.synthetic.main.fragment_live_death_layout.view.*
 
 /**
@@ -43,7 +43,7 @@ class LiveDeathTitleView : FrameLayout{
         fragmentLeftRv = titleView?.findViewById(R.id.fragment_left_rv)
         val manager = LinearLayoutManager(mContext, RecyclerView.VERTICAL, false)
         fragmentLeftRv?.layoutManager = manager
-        fragmentLeftRv?.adapter = FragmentLeftAdapter(mContext!!,Utlis.initDrawLayoutDate(context))
+        fragmentLeftRv?.adapter = FragmentLeftAdapter(mContext!!,Utils.initDrawLayoutDate(context))
     }
 
 

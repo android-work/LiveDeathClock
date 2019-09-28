@@ -18,7 +18,7 @@ object SpUtils {
 
     fun getBoolean(context: Context,key: String,defValue: Boolean): Boolean = context.getSharedPreferences(SP, 0).getBoolean(key,defValue)
 
-    fun saveString(context: Context,key: String,value: String){
+    fun saveString(context: Context,key: String,value: String?){
         val sp = context.getSharedPreferences(SP, 0)
         val edit = sp.edit()
         edit.putString(key,value)

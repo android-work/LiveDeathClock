@@ -23,4 +23,6 @@
     <string name="fragment_live_age">你的年龄</string>
     <string name="age">%d岁</string>
     <string name="fragment_live_existence">在这个世界上，你已经存在了</string>
+    <string name="day">天</string>
+    <string name="week">周</string>
 </resources>

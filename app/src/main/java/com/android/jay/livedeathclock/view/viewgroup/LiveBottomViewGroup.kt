@@ -50,7 +50,7 @@ class LiveBottomViewGroup: FrameLayout {
     /**
      * 设置左下角文本内容
      * */
-    fun setBottomOntText(content: String){
+    fun setBottomOneText(content: String){
 
         bottom_one_text.text = content
     }

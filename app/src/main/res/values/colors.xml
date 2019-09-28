@@ -5,4 +5,7 @@
     <color name="splash_over_color">#EE306B</color>
     <color name="edit_color">#D7E8E8EE</color>
     <color name="splash_popup_title_color">#43000000</color>
+    <color name="fragment_live_bottom_color">#9FC0BEBE</color>
+    <color name="fragment_live_top_color">#F3F3FC</color>
+    <color name="fragment_live_bg_color">#CBFFFFFF</color>
 </resources>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/fragment_death_bg_color"
+              android:layout_marginTop="20dp">
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+        <com.ancroid.work.clockview.ClockView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:id="@+id/fragment_death_clock"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/fragment_death_gezi_des"
+                android:textColor="@color/fragment_death_gezi_color"
+                android:textSize="13sp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"/>
+
+        <!--绘制格子-->
+
+        <com.ancroid.work.circleview.DrawGeZiView
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/fragment_death_gezi_view"/>
+
+        <!--余生电池-->
+
+        <LinearLayout
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fragment_death_remind_live"
+                    android:textColor="@color/fragment_death_title_color"
+                    android:textSize="12sp"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/fragment_death_remind_live_ic"
+                    android:src="@mipmap/ic_battery9"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="97%"
+                    android:textSize="12sp"
+                    android:textColor="@color/fragment_death_title_color"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/fragment_death_remind_live_tv"/>
+        </LinearLayout>
+
+        <!--秒、天、月、年-->
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="10dp">
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_marginTop="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fragment_death_second"
+                    android:id="@+id/fragment_death_second"
+                    android:textColor="@color/fragment_death_title_color"
+                    android:textSize="12sp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_marginTop="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fragment_death_day"
+                    android:id="@+id/fragment_death_day"
+                    android:textColor="@color/fragment_death_title_color"
+                    android:textSize="12sp"/>
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_marginTop="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fragment_death_month"
+                    android:id="@+id/fragment_death_month"
+                    android:textColor="@color/fragment_death_title_color"
+                    android:textSize="12sp"/>
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_marginTop="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fragment_death_year"
+                    android:id="@+id/fragment_death_year"
+                    android:textColor="@color/fragment_death_title_color"
+                    android:textSize="12sp"/>
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/fragment_death_remind_make_wish"
+                android:textSize="12sp"
+                android:textColor="@color/fragment_death_title_color"
+                android:layout_marginLeft="10dp"/>
+
+        <!--定制计划-->
+        <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp"
+                android:id="@+id/fragment_death_make_wish_fl">
+
+        </FrameLayout>
+
+
+
+    </LinearLayout>
+
+</ScrollView>

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.android.jay.livedeathclock.R
+import com.android.jay.livedeathclock.utils.logUtil
 
 /**
  * @author Mr.Liu
@@ -30,18 +31,22 @@ abstract class BaseFragment: Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        initData(mView!!)
+        logUtil("tag","加载子布局")
+
+        initBaseLayout(mView!!)
+
+        initData()
     }
 
     /**
      * 获取布局资源
-     * */
-    abstract fun initView(): Int
-
-    /**
-     * 加载数据
      *
      * @param view 布局
      * */
-    abstract fun initData(view: View)
+    abstract fun initBaseLayout(view: View)
+
+    /**
+     * 加载数据
+     * */
+    abstract fun initData()
 }

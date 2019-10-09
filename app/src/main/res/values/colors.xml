@@ -8,4 +8,8 @@
     <color name="fragment_live_bottom_color">#9FC0BEBE</color>
     <color name="fragment_live_top_color">#F3F3FC</color>
     <color name="fragment_live_bg_color">#CBFFFFFF</color>
+    <color name="fragment_death_bg_color">#17171A</color>
+    <color name="fragment_death_gezi_color">#CCD9D9DB</color>
+    <color name="fragment_death_title_color">#fff</color>
+    <color name="fragment_death_gezi_line_color">#B8ABE6</color>
 </resources>

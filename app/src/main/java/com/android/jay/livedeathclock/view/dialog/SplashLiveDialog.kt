@@ -27,14 +27,14 @@ class SplashLiveDialog(context: Context) : Dialog(context) {
         setContentView(R.layout.splash_live_layout)
         this.setCanceledOnTouchOutside(false)
 
-        val liveYears = SpUtils.getInt(context, LIVE_YEARS, 90)
+        val liveYears = SpUtils.getString(context, LIVE_YEARS, "90")
 
         splashLiveWheel = findViewById<WheelView<String>>(R.id.splash_live_wheel)
 
         splashLiveWheel?.setWheelAdapter(ArrayWheelAdapter(context))
         splashLiveWheel?.setWheelData(DateUtil.getLiveYears())
         splashLiveWheel?.setWheelSize(5)
-        splashLiveWheel?.selection = liveYears ?: 90
+        splashLiveWheel?.selection = liveYears!!.toInt()
 
         var style = WheelView.WheelViewStyle()
         style.selectedTextSize = Utils.dp2Px(context,10f).toInt()

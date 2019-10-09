@@ -13,12 +13,12 @@ object DateUtil {
     /**
      * 计算出生年份
      * */
-    fun getBirYear(): MutableList<String>{
+    fun getBirYear(): MutableList<String> {
 
         var yearList: MutableList<String> = mutableListOf()
         var year = Calendar.getInstance().get(Calendar.YEAR)
 
-        for (i in 100 downTo 0){
+        for (i in 100 downTo 0) {
             yearList.add("${year - i}")
         }
         return yearList
@@ -29,18 +29,18 @@ object DateUtil {
      *
      * @param year 选中年份
      * */
-    fun getBirMonth(year: Int): MutableList<String>{
+    fun getBirMonth(year: Int): MutableList<String> {
 
         var monthList: MutableList<String> = mutableListOf()
         var month = Calendar.getInstance().get(Calendar.MONTH) + 1
         var curYear = Calendar.getInstance().get(Calendar.YEAR)
 
-        if(year < curYear){
+        if (year < curYear) {
             month = 12
         }
 
         monthList.clear()
-        for (i in 1..month){
+        for (i in 1..month) {
             monthList.add("$i")
         }
         return monthList
@@ -51,7 +51,7 @@ object DateUtil {
      *
      * @param month 选中月份
      * */
-    fun getBirDate(year: Int,month: Int): MutableList<String>{
+    fun getBirDate(year: Int, month: Int): MutableList<String> {
 
         var dateList: MutableList<String> = mutableListOf()
         var curMonth = Calendar.getInstance().get(Calendar.MONTH) + 1
@@ -61,17 +61,17 @@ object DateUtil {
         //获取选中月份有多少天
         var monthOfDays = getMonthOfDays(year, month)
 
-        monthOfDays = if(year < curYear){
+        monthOfDays = if (year < curYear) {
             monthOfDays
-        }else{
-            if(month == curMonth){
+        } else {
+            if (month == curMonth) {
                 curDate
-            }else{
+            } else {
                 monthOfDays
             }
         }
 
-        for (i in 1 .. monthOfDays){
+        for (i in 1..monthOfDays) {
             dateList.add("$i")
         }
 
@@ -85,13 +85,13 @@ object DateUtil {
      *
      * @param month 查询的月份
      * */
-    fun getMonthOfDays(year: Int,month: Int): Int{
+    fun getMonthOfDays(year: Int, month: Int): Int {
 
         var days = isLeapYear(year)
 
-        days = when(month){
-            1,3,5,7,8,10,12 -> 31
-            4,6,9,11 -> 30
+        days = when (month) {
+            1, 3, 5, 7, 8, 10, 12 -> 31
+            4, 6, 9, 11 -> 30
             else -> days
         }
 
@@ -103,24 +103,24 @@ object DateUtil {
      *
      * @param year 需要查询的年份
      * */
-    fun isLeapYear(year: Int): Int{
+    fun isLeapYear(year: Int): Int {
 
-        return if((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)){
-                    29
-                }else{
-                    28
-                }
+        return if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
+            29
+        } else {
+            28
+        }
     }
 
     /**
      * 获取小时
      * */
-    fun getBirHour(): MutableList<String>{
+    fun getBirHour(): MutableList<String> {
 
         var hourList: MutableList<String> = mutableListOf()
 
-        for (i in 0 .. 23){
-            hourList.add(String.format("%02d",i))
+        for (i in 0..23) {
+            hourList.add(String.format("%02d", i))
         }
 
         return hourList
@@ -129,12 +129,12 @@ object DateUtil {
     /**
      * 获取分钟和秒
      * */
-    fun getBirMinOrSec(): MutableList<String>{
+    fun getBirMinOrSec(): MutableList<String> {
 
         var minOrSecList: MutableList<String> = mutableListOf()
 
-        for(i in 0..59){
-            minOrSecList.add(String.format("%02d",i))
+        for (i in 0..59) {
+            minOrSecList.add(String.format("%02d", i))
         }
 
         return minOrSecList
@@ -143,17 +143,17 @@ object DateUtil {
     /**
      * 数字字符串转整型
      * */
-    fun numStr2Int(numStr: String): Int{
+    fun numStr2Int(numStr: String): Int {
         return numStr.toInt()
     }
 
     /**
      * 获取用户预选生命年限
      * */
-    fun getLiveYears(): MutableList<String>{
+    fun getLiveYears(): MutableList<String> {
 
         var liveYears: MutableList<String> = mutableListOf()
-        for (i in 0..150){
+        for (i in 0..150) {
             liveYears.add("$i")
         }
 
@@ -167,7 +167,7 @@ object DateUtil {
      *
      * @param format 日期格式
      * */
-    fun dateStr2Millis(date: String,format: String): Long{
+    fun dateStr2Millis(date: String, format: String): Long {
 
         val simpleDateFormat = SimpleDateFormat(format)
         return simpleDateFormat.parse(date).time
@@ -178,7 +178,7 @@ object DateUtil {
      *
      * @param birMillis 出生毫秒值
      * */
-    fun calculationAge(birMillis: Long): Int{
+    fun calculationAge(birMillis: Long): Int {
 
         val instance = Calendar.getInstance()
         val curYear = instance.get(Calendar.YEAR)
@@ -186,14 +186,14 @@ object DateUtil {
         instance.timeInMillis = birMillis
         val birYear = instance.get(Calendar.YEAR)
 
-        return curYear - birYear + 1
+        return Math.abs((curYear - birYear)) + 1
 
     }
 
     /**
      * 计算天数
      * */
-    fun calculationDays(birMillis: Long): Long{
+    fun calculationDays(birMillis: Long): Long {
 
         var curMillis = System.currentTimeMillis()
 
@@ -203,19 +203,28 @@ object DateUtil {
     /**
      * 计算月数
      * */
-    fun calculationMonths(birMillis: Long): Int{
+    fun calculationMonths(birMillis: Long): Int {
 
         val instance = Calendar.getInstance()
+        var curMonth = instance.get(Calendar.MONTH) + 1
 
         val age = calculationAge(birMillis)
+        instance.timeInMillis = birMillis
 
-        return (age - 1) * 12 + instance.get(Calendar.MONTH)
+        var birMonth = instance.get(Calendar.MONTH) + 1
+
+        return if(curMonth >= birMonth){
+            age * 12 + curMonth - birMonth
+        }else{
+            age * 12 + (curMonth - birMonth)
+        }
+
     }
 
     /**
      * 计算周数
      * */
-    fun calculationWeeks(birMillis: Long): Long{
+    fun calculationWeeks(birMillis: Long): Long {
 
         val days = calculationDays(birMillis)
 
@@ -225,11 +234,12 @@ object DateUtil {
     /**
      * 计算小时
      * */
-    fun calculationHours(birMillis: Long):Long{
+    fun calculationHours(birMillis: Long): Long {
 
-        val calendar = Calendar.getInstance()
+        val curTillis = System.currentTimeMillis()
 
-        val curTillis = calendar.timeInMillis
+        logUtil("tag", "curTillis:${(curTillis - birMillis)}")
+        logUtil("tag", "return:${(curTillis - birMillis) / (1000 * 60 * 60)}")
 
         return (curTillis - birMillis) / (1000 * 60 * 60)
     }
@@ -237,8 +247,20 @@ object DateUtil {
     /**
      * 计算分钟
      * */
-    fun calculationMinutes(birMillis: Long): Long{
+    fun calculationMinutes(birMillis: Long): Long {
 
-       return calculationHours(birMillis) * 60
+        var curTillis = System.currentTimeMillis()
+
+        return (curTillis - birMillis) / 1000 / 60
+    }
+
+    /**
+     * 格式化当前日期
+     * */
+    fun formatDate(): String{
+
+        val date = Date()
+        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
+        return simpleDateFormat.format(date!!)
     }
 }

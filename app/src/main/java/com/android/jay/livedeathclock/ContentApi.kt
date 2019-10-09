@@ -15,4 +15,7 @@ const val LIVE_YEARS = "live_years"
 /**Log日志开关*/
 const val LOG: Boolean = true
 
+/**当天日期字段*/
+const val CUR_DATE: String = "cur_date"
+
 

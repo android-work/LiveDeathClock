@@ -27,7 +27,31 @@ interface IPresenter {
         fun calculateAge()
 
         //绑定view
-        fun bindView(splashView: IView.ISplashView)
+        fun bindView(liveView: IView.ILiveView)
+
+        //解绑view
+        fun unBindView()
+    }
+
+    /**
+     * DeathFragment的presenter接口
+     * */
+    interface IDeathPresenter{
+
+        //计算活了多久，总生命
+        fun calculateDrawGeZi()
+
+        //计算余生
+        fun calculateReminderLive()
+
+        //计算生命秒、天、月、年倒计时
+        fun calculateSecondCountdown()
+
+        //计算生命 天、月、年倒计时
+        fun calculateLiveCountdown()
+
+        //绑定view
+        fun bindView(deathView: IView.IDeathView)
 
         //解绑view
         fun unBindView()

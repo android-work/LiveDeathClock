@@ -52,7 +52,7 @@ class SplashSetView : FrameLayout {
 
             //保存默认数据
             SpUtils.saveString(context,BIR_DATE, splash_bir_text.text.toString().trim())
-            SpUtils.saveInt(context, LIVE_YEARS,splash_live_text.toString().trim().toInt())
+            SpUtils.saveString(context, LIVE_YEARS,splash_live_text.text.toString().trim())
 
             //完成按钮
             mActivity?.startActivity(Intent(mContext, MainActivity::class.java))
@@ -73,7 +73,7 @@ class SplashSetView : FrameLayout {
         var date = "${Calendar.getInstance().get(Calendar.YEAR)}-${String.format("%02d",Calendar.getInstance().get(Calendar.MONTH))}-${String.format("%02d",Calendar.getInstance().get(Calendar.DAY_OF_MONTH))}"
         splash_bir_text.text = "${SpUtils.getString(context, BIR_DATE,"$date 00:00:00")}"
 
-        splash_live_text.text = "${SpUtils.getInt(context, LIVE_YEARS,90)}"
+        splash_live_text.text = "${SpUtils.getString(context, LIVE_YEARS,"90")}"
 
         splash_over.text = mContext?.getString(R.string.splash_popup_over)
     }
@@ -92,7 +92,7 @@ class SplashSetView : FrameLayout {
                 splash_live_text.text = date
 
                 //保存数据
-                SpUtils.saveInt(context, LIVE_YEARS,DateUtil.numStr2Int(date))
+//                SpUtils.saveInt(context, LIVE_YEARS,DateUtil.numStr2Int(date))
             }
         })
     }
@@ -111,7 +111,7 @@ class SplashSetView : FrameLayout {
                 splash_bir_text.text = date
 
                 //保存数据
-                SpUtils.saveString(context, BIR_DATE,date)
+//                SpUtils.saveString(context, BIR_DATE,date)
             }
 
         })

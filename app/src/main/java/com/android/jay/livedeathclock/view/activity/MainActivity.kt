@@ -17,7 +17,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     var curFragment: BaseFragment? = null
-//    var beginTransaction: FragmentTransaction? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,7 +71,7 @@ class MainActivity : AppCompatActivity() {
                 if(fragment?.isAdded ?: false && supportFragmentManager.findFragmentByTag(fragmentTag) != null){
 
                     logUtil("tag","已经加载过")
-                    beginTransaction?.show(fragment!!)
+                    beginTransaction?.show(fragment!!).commit()
                 }else{
 
                     logUtil("tag","${curFragment}:fragmentTag：$fragment")

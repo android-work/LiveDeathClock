@@ -103,4 +103,13 @@ class LiveDeathTitleView : FrameLayout{
     fun setTitle(resId: Int){
         fragment_live_death_title.text = resources.getString(resId)
     }
+
+    /**
+     * 设置标题颜色
+     *
+     * @param textColorId 字符串字体颜色
+     * */
+    fun setTitleColor(textColorId: Int){
+        fragment_live_death_title.setTextColor(textColorId)
+    }
 }

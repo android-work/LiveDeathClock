@@ -3,8 +3,13 @@ package com.android.jay.livedeathclock.view.fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
+import android.widget.LinearLayout
+import androidx.appcompat.widget.AppCompatTextView
+import com.ancroid.work.clockview.ClockView
 import com.android.jay.livedeathclock.BIR_DATE
 import com.android.jay.livedeathclock.R
+import com.android.jay.livedeathclock.imp.LivePresenter
+import com.android.jay.livedeathclock.interfaces.presenter.IPresenter
 import com.android.jay.livedeathclock.interfaces.view.IView
 import com.android.jay.livedeathclock.utils.DateUtil
 import com.android.jay.livedeathclock.utils.SpUtils
@@ -16,8 +21,11 @@ import kotlinx.android.synthetic.main.fragment_live_layout.*
 
 class LiveFragment: BaseFragment(),IView.ILiveView{
 
-
     var liveView: View? = null
+    var liveClock: ClockView? = null
+    var btnTopView: LiveBottomViewGroup? = null
+    var btnBottomView: LiveBottomViewGroup? = null
+    var livePresenter: IPresenter.ILivePresenter? = null
 
     /**
      * 年龄计算完成，更新ui
@@ -27,28 +35,39 @@ class LiveFragment: BaseFragment(),IView.ILiveView{
 
     }
 
+    /**
+     * 活得分钟计算
+     * */
+    override fun callBackCalculateMinute() {
+
+        logUtil("tag","广播更新")
+        initBottomView(btnTopView,btnBottomView)
+    }
 
     /**
      * 初始化数据
      * */
-    override fun initData(view: View) {
+    override fun initData() {
 
         //加载子布局，初始化
-        initChildView(view)
+        initChildView()
+
+        //绑定presenter
+        livePresenter = LivePresenter(context!!)
+        livePresenter?.bindView(this)
     }
 
     /**
      * 加载子布局并添加
      * */
-    private fun initChildView(view: View) {
-        liveView = LayoutInflater.from(mContext).inflate(R.layout.fragment_live_layout, null)
+    private fun initChildView() {
 
-        //初始化布局容器，添加子布局
-        val baseContent = view.findViewById<LiveDeathTitleView>(R.id.fragment_base)
-        baseContent.addView(liveView)
+        liveClock = liveView?.findViewById(R.id.fragment_live_clock)
+        btnTopView = liveView?.findViewById(R.id.fragment_btn_top_view)
+        btnBottomView = liveView?.findViewById(R.id.fragment_btn_bottom_view)
+        val liveAge = liveView?.findViewById<AppCompatTextView>(R.id.fragment_live_age)
 
-        val btnTopView = liveView?.findViewById<LiveBottomViewGroup>(R.id.fragment_btn_top_view)
-        val btnBottomView = liveView?.findViewById<LiveBottomViewGroup>(R.id.fragment_btn_bottom_view)
+        liveAge!!.text = resources.getString(R.string.age,DateUtil.calculationAge(DateUtil.dateStr2Millis(SpUtils.getString(mContext!!, BIR_DATE, "")!!, "yyyy-MM-dd HH:mm:ss")))
 
         initBottomView(btnTopView!!,btnBottomView!!)
 
@@ -61,35 +80,51 @@ class LiveFragment: BaseFragment(),IView.ILiveView{
      *
      * @param btnBottomView 第二个布局
      * */
-    private fun initBottomView(btnTopView: LiveBottomViewGroup, btnBottomView: LiveBottomViewGroup) {
+    private fun initBottomView(btnTopView: LiveBottomViewGroup?, btnBottomView: LiveBottomViewGroup?) {
 
-        val birMillis = DateUtil.dateStr2Millis(SpUtils.getString(mContext!!, BIR_DATE, "")!!, "yyyy-MM-DD hh:mm:ss")
-        logUtil("tag","birMillis:$birMillis")
+        val birMillis = DateUtil.dateStr2Millis(SpUtils.getString(mContext!!, BIR_DATE, "")!!, "yyyy-MM-dd HH:mm:ss")
+        logUtil("tag","millis:${DateUtil.calculationMinutes(birMillis)}")
 
-        btnTopView.setTopOneText(mContext?.resources!!.getString(R.string.year))
-        btnTopView.setTopTwoText(mContext?.resources!!.getString(R.string.month))
-        btnTopView.setTopThreeText(mContext?.resources!!.getString(R.string.week))
+        btnTopView?.setTopOneText("${DateUtil.calculationAge(birMillis)}")
+        btnTopView?.setTopTwoText("${DateUtil.calculationMonths(birMillis)}")
+        btnTopView?.setTopThreeText("${DateUtil.calculationWeeks(birMillis)}")
 
-        btnTopView.setBottomOneText("${DateUtil.calculationAge(birMillis)}")
-        btnTopView.setBottomTwoText("${DateUtil.calculationMonths(birMillis)}")
-        btnTopView.setBottomThreeText("${DateUtil.calculationWeeks(birMillis)}")
+        btnTopView?.setBottomOneText(mContext?.resources!!.getString(R.string.year))
+        btnTopView?.setBottomTwoText(mContext?.resources!!.getString(R.string.month))
+        btnTopView?.setBottomThreeText(mContext?.resources!!.getString(R.string.week))
 
-        btnBottomView.setBottomOneText(mContext?.resources!!.getString(R.string.day))
-        btnBottomView.setBottomTwoText(mContext?.resources!!.getString(R.string.hour))
-        btnBottomView.setBottomThreeText(mContext?.resources!!.getString(R.string.minute))
+        btnBottomView?.setBottomOneText(mContext?.resources!!.getString(R.string.day))
+        btnBottomView?.setBottomTwoText(mContext?.resources!!.getString(R.string.hour))
+        btnBottomView?.setBottomThreeText(mContext?.resources!!.getString(R.string.minute))
 
-        btnBottomView.setBottomOneText("${DateUtil.calculationDays(birMillis)}")
-        btnBottomView.setBottomTwoText("${DateUtil.calculationHours(birMillis)}")
-        btnBottomView.setBottomThreeText("${DateUtil.calculationMinutes(birMillis)}")
+        btnBottomView?.setTopOneText("${DateUtil.calculationDays(birMillis)}")
+        btnBottomView?.setTopTwoText("${DateUtil.calculationHours(birMillis)}")
+        btnBottomView?.setTopThreeText("${DateUtil.calculationMinutes(birMillis)}")
 
     }
 
 
     /**
-     * 加载布局
+     * 初始化base布局
      * */
-    override fun initView(): Int {
-        return R.layout.fragment_live_layout
+    override fun initBaseLayout(view: View) {
+
+        liveView = LayoutInflater.from(mContext).inflate(R.layout.fragment_live_layout, null)
+        //初始化布局容器，添加子布局
+        val baseContent = view.findViewById<LiveDeathTitleView>(R.id.fragment_base)
+        baseContent.addViews(liveView!!)
+    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        liveClock?.stop()
+        livePresenter?.unBindView()
+        livePresenter = null
+        liveView = null
+        btnTopView = null
+        btnBottomView = null
+        liveClock = null
     }
 
 }

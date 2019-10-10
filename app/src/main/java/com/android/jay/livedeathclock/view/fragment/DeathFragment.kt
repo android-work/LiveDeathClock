@@ -3,6 +3,8 @@ package com.android.jay.livedeathclock.view.fragment
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.FrameLayout
+import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import com.ancroid.work.circleview.DrawGeZiView
@@ -25,6 +27,21 @@ class DeathFragment: BaseFragment(),IView.IDeathView {
     var deathYear: AppCompatTextView? = null
 
     /**
+     * 初始化base布局
+     * */
+    override fun initBaseLayout(view: View) {
+
+        var titleView = view.findViewById<LiveDeathTitleView>(R.id.fragment_base)
+        titleView?.setBackgroundColor(resources.getColor(R.color.fragment_death_bg_color))
+        titleView?.setMenuRes(R.mipmap.ic_menu_white)
+        titleView?.setTitle(R.string.fragment_death_tilte)
+        titleView?.setTitleColor(resources.getColor(R.color.fragment_death_title_color))
+
+        deathView = LayoutInflater.from(mContext).inflate(R.layout.fragment_death_layout, null)
+        titleView?.addViews(deathView!!)
+    }
+
+    /**
      * 初始化数据
      * */
     override fun initData() {
@@ -34,13 +51,28 @@ class DeathFragment: BaseFragment(),IView.IDeathView {
 
         //初始化时钟
         initClock()
+        //初始化底部制定的计划
+        initWish()
 
         //绘制生命格子
         deathPresenter?.calculateDrawGeZi()
         //绘制生命剩余电池
         deathPresenter?.calculateReminderLive()
+        //绘制生命秒倒计时
+        deathPresenter?.calculateSecondCountdown()
         //绘制生命倒计时
-        deathPresenter?.calculateReminderLive()
+        deathPresenter?.calculateLiveCountdown()
+
+    }
+
+    /**
+     * chu初始化死亡页面的愿望单
+     * */
+    private fun initWish() {
+
+        val makeWishFl = deathView?.findViewById<FrameLayout>(R.id.fragment_death_make_wish_fl)
+
+        //判断加载哪个布局
 
     }
 
@@ -84,6 +116,8 @@ class DeathFragment: BaseFragment(),IView.IDeathView {
      * @param year 年倒计时
      * */
     override fun callBackLiveCountdown(day: Long, month: Int, year: Int) {
+
+        logUtil("tag","$day - $month - $year")
 
         deathDay?.text = resources.getString(R.string.fragment_death_day,day)
         deathMonth?.text = resources.getString(R.string.fragment_death_month,month)
@@ -136,21 +170,6 @@ class DeathFragment: BaseFragment(),IView.IDeathView {
         deathClock = deathView?.findViewById<ClockView>(R.id.fragment_death_clock)
         deathClock?.setClockColor(resources.getColor(R.color.fragment_death_title_color))
         deathClock?.setMinuteColor(resources.getColor(R.color.fragment_death_title_color))
-    }
-
-    /**
-     * 初始化base布局
-     * */
-    override fun initBaseLayout(view: View) {
-
-        var titleView = view.findViewById<LiveDeathTitleView>(R.id.fragment_base)
-        titleView?.setBackgroundColor(resources.getColor(R.color.fragment_death_bg_color))
-        titleView?.setMenuRes(R.mipmap.ic_menu_white)
-        titleView?.setTitle(R.string.fragment_death_tilte)
-        titleView?.setTitleColor(resources.getColor(R.color.fragment_death_title_color))
-
-        deathView = LayoutInflater.from(mContext).inflate(R.layout.fragment_death_layout, null)
-        titleView?.addViews(deathView!!)
     }
 
     override fun onDestroyView() {

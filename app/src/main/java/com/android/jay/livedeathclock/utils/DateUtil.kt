@@ -2,6 +2,7 @@ package com.android.jay.livedeathclock.utils
 
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.abs
 
 /**
  * @author Mr.Liu
@@ -186,7 +187,7 @@ object DateUtil {
         instance.timeInMillis = birMillis
         val birYear = instance.get(Calendar.YEAR)
 
-        return Math.abs((curYear - birYear)) + 1
+        return abs((curYear - birYear)) + 1
 
     }
 
@@ -262,5 +263,55 @@ object DateUtil {
         val date = Date()
         val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
         return simpleDateFormat.format(date!!)
+    }
+
+    /**
+     * 计算生命还剩多少个月
+     *
+     * @param endMillis 结束时的毫秒值
+     * */
+    fun calculationCountDownMonths(endMillis: Long): Int {
+
+        //获取剩余年
+        val remindYear = calculationCountDownAge(endMillis)
+
+        //获取当前月
+        val calendar = Calendar.getInstance()
+        val curMonth = calendar.get(Calendar.MONTH)
+
+        //获取生命结束月
+        calendar.timeInMillis = endMillis
+        val endMonth = calendar.get(Calendar.MONTH)
+
+        if(endMonth > curMonth){
+            return remindYear * 12 + endMonth - curMonth
+        }
+
+        return remindYear * 12 - endMonth + curMonth
+
+    }
+
+    /**
+     * 计算生命还剩多少年
+     *
+     * @param endMillis 结束时的毫秒值
+     * */
+    fun calculationCountDownAge(endMillis: Long): Int {
+
+        //获取当前年、月
+        val calendar = Calendar.getInstance()
+        val curYear = calendar.get(Calendar.YEAR)
+        val curMonth = calendar.get(Calendar.MONTH)
+
+        //获取生命结束年、月
+        calendar.timeInMillis = endMillis
+        val endYear = calendar.get(Calendar.YEAR)
+        val endMonth = calendar.get(Calendar.MONTH)
+
+        if (curMonth > endMonth){
+            return endYear - curYear - 1
+        }
+
+        return endYear - curYear
     }
 }

@@ -12,4 +12,5 @@
     <color name="fragment_death_gezi_color">#CCD9D9DB</color>
     <color name="fragment_death_title_color">#fff</color>
     <color name="fragment_death_gezi_line_color">#B8ABE6</color>
+    <color name="fragment_death_wish_rv_color">#EDE2E2E2</color>
 </resources>

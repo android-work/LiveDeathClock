@@ -28,9 +28,11 @@
     <string name="fragment_death_tilte">死之钟</string>
     <string name="fragment_death_gezi_des">每个格子代表一个月，白格用完之时，也是生命结束之日</string>
     <string name="fragment_death_remind_live">您的余生大约还剩下</string>
-    <string name="fragment_death_second">%l 秒</string>
-    <string name="fragment_death_day">%l天</string>
+    <string name="fragment_death_second">%d 秒</string>
+    <string name="fragment_death_day">%d 天</string>
     <string name="fragment_death_month">%d 月</string>
     <string name="fragment_death_year">%d 年</string>
     <string name="fragment_death_remind_make_wish">剩下的日子里，你大约可以</string>
+    <string name="fragment_death_no_make_wish">没有制定？点击前往制定</string>
+    <string name="fragment_death_wish_title">事件</string>
 </resources>

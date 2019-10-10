@@ -53,7 +53,9 @@ class DeathPresenter(var context: Context): IPresenter.IDeathPresenter {
         //获取总生命
         val totalAge = SpUtils.getString(context, LIVE_YEARS, "90")!!.toInt()
 
-        var x = (curAge * 100 / totalAge)
+        var x = ((totalAge * 12 - curAge) * 100 / (totalAge * 12))
+
+        logUtil("tag","$totalAge - $curAge = ${(totalAge - curAge)*100} ---> ${(totalAge - curAge)*100 / totalAge}")
 
         var batteryId = when(x){
             in 0..15 ->{
@@ -94,6 +96,23 @@ class DeathPresenter(var context: Context): IPresenter.IDeathPresenter {
      **/
     override fun calculateSecondCountdown() {
 
+        val endMillis = calculateDeathMillis()
+
+        val calendar = Calendar.getInstance()
+        val curMillis = calendar.timeInMillis
+        countdownMillis = endMillis - curMillis
+        logUtil("tag","$endMillis - $curMillis = ${countdownMillis}")
+
+//        mDeathView?.callBackSecondCountdown(countdownMillis / 1000)
+
+        //开启倒计时
+        startCountDown()
+    }
+
+    /**
+     * 获取生命结束时的毫秒值
+     * */
+    private fun calculateDeathMillis(): Long {
         val birDate = SpUtils.getString(context!!, BIR_DATE, "")
         val dateMillis = DateUtil.dateStr2Millis(birDate!!, "yyyy-MM-dd HH:mm:ss")
 
@@ -101,20 +120,11 @@ class DeathPresenter(var context: Context): IPresenter.IDeathPresenter {
 
         val calendar = Calendar.getInstance()
         calendar.timeInMillis = dateMillis
-        calendar.add(calendar.get(Calendar.YEAR),strYear!!.toInt())
+        logUtil("tag", "${Calendar.YEAR}")
+        calendar.add(Calendar.YEAR, strYear!!.toInt())
 
         //获取结束点日期毫秒值
-        val endMillis = calendar.timeInMillis
-
-        calendar.time = Date()
-        val curMillis = calendar.timeInMillis
-        countdownMillis = endMillis - curMillis
-        logUtil("tag","$endMillis - $curMillis = ${countdownMillis}")
-
-        mDeathView?.callBackSecondCountdown(countdownMillis)
-
-        //开启倒计时
-        startCountDown()
+        return calendar.timeInMillis
     }
 
     /**
@@ -126,19 +136,18 @@ class DeathPresenter(var context: Context): IPresenter.IDeathPresenter {
             override fun onTick(p0: Long) {
 
                 countdownMillis = p0
+                logUtil("tag","倒计时:${p0/1000}")
                 //进行view的更新
-                mDeathView?.callBackSecondCountdown(p0)
+                mDeathView?.callBackSecondCountdown(p0 / 1000)
             }
 
             override fun onFinish() {
 
-                //结束倒计时
-                countDown?.cancel()
-                countDown = null
-
             }
 
         }
+
+        countDown?.start()
     }
 
     /**
@@ -160,13 +169,27 @@ class DeathPresenter(var context: Context): IPresenter.IDeathPresenter {
      * 计算天、月、年倒计时
      * */
     private fun calculateCountdown() {
+
+        //生命结束毫秒值
+        val endMillis = calculateDeathMillis()
+
         //计算天
-        val days = countdownMillis / 24 * 60 * 60 * 1000
+        val days = countdownMillis / (24 * 60 * 60 * 1000)
         //计算月
-        val months = DateUtil.calculationMonths(countdownMillis)
+        val months = DateUtil.calculationCountDownMonths(endMillis)
         //计算年
-        val years = DateUtil.calculationAge(countdownMillis)
+        val years = DateUtil.calculationCountDownAge(endMillis)
+
+        logUtil("tag","$years - $months - $days")
         mDeathView?.callBackLiveCountdown(days, months, years)
+    }
+
+    /**
+     * 获取数据库中存放的事件
+     * */
+    override fun getSqlEvents() {
+
+
     }
 
 
@@ -176,6 +199,9 @@ class DeathPresenter(var context: Context): IPresenter.IDeathPresenter {
     override fun unBindView() {
 
         mDeathView = null
+        //结束倒计时
+        countDown?.cancel()
+        countDown = null
     }
 
     /**

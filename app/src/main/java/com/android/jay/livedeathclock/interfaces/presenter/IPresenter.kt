@@ -37,6 +37,9 @@ interface IPresenter {
      * DeathFragment的presenter接口
      * */
     interface IDeathPresenter{
+        
+        //获取存放在数据库中的事件
+        fun getSqlEvents()
 
         //计算活了多久，总生命
         fun calculateDrawGeZi()
